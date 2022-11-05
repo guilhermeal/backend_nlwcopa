@@ -4,7 +4,7 @@ CREATE TABLE "Participant" (
     "userId" TEXT NOT NULL,
     "poolId" TEXT NOT NULL,
     CONSTRAINT "Participant_userId_fkey" FOREIGN KEY ("userId") REFERENCES "User" ("id") ON DELETE RESTRICT ON UPDATE CASCADE,
-    CONSTRAINT "Participant_poolId_fkey" FOREIGN KEY ("poolId") REFERENCES "Pool" ("id") ON DELETE RESTRICT ON UPDATE CASCADE
+    CONSTRAINT "Participant_poolId_fkey" FOREIGN KEY ("poolId") REFERENCES "Poll" ("id") ON DELETE RESTRICT ON UPDATE CASCADE
 );
 
 -- CreateTable
@@ -46,10 +46,10 @@ CREATE TABLE "new_Pool" (
     "ownerId" TEXT,
     CONSTRAINT "Pool_ownerId_fkey" FOREIGN KEY ("ownerId") REFERENCES "User" ("id") ON DELETE SET NULL ON UPDATE CASCADE
 );
-INSERT INTO "new_Pool" ("code", "createdAt", "id", "title") SELECT "code", "createdAt", "id", "title" FROM "Pool";
-DROP TABLE "Pool";
-ALTER TABLE "new_Pool" RENAME TO "Pool";
-CREATE UNIQUE INDEX "Pool_code_key" ON "Pool"("code");
+INSERT INTO "new_Pool" ("code", "createdAt", "id", "title") SELECT "code", "createdAt", "id", "title" FROM "Poll";
+DROP TABLE "Poll";
+ALTER TABLE "new_Pool" RENAME TO "Poll";
+CREATE UNIQUE INDEX "Pool_code_key" ON "Poll"("code");
 PRAGMA foreign_key_check;
 PRAGMA foreign_keys=ON;
 
