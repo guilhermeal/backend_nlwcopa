@@ -29,13 +29,13 @@ model Poll {
 model Participant {
   id     String @id @default(cuid())
   userId String
-  poolId String
+  pollId String
 
   guesses Guess[]
   user    User    @relation(fields: [userId], references: [id])
-  poll    Poll    @relation(fields: [poolId], references: [id])
+  poll    Poll    @relation(fields: [pollId], references: [id])
 
-  @@unique([userId, poolId])
+  @@unique([userId, pollId])
 }
 
 // TABELA DE USUARIOS

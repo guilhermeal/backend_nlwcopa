@@ -45,9 +45,9 @@ async function main() {
 
           participant: {
             connect: {
-              userId_poolId: {
+              userId_pollId: {
                 userId: user.id,
-                poolId: poll.id,
+                pollId: poll.id,
               }
             }
           }
