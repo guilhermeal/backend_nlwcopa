@@ -1,4 +1,4 @@
-import { string, z } from "zod";
+import { z } from "zod";
 import { FastifyInstance } from "fastify"
 import ShortUniqueId from "short-unique-id"
 import { prisma } from "../lib/prisma"
