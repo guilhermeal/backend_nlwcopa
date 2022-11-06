@@ -1,5 +1,6 @@
 import Fastify from "fastify";
 import cors from "@fastify/cors";
+import jwt from "@fastify/jwt";
 
 import { pollRoutes } from "./routes/poll";
 import { userRoutes } from "./routes/user";
@@ -12,11 +13,16 @@ import { authRoutes } from "./routes/auth";
 async function bootstrap() {
     const fastify = Fastify({
         logger: true,
-    })
+    });
 
     await fastify.register(cors, {
         origin: true    // para ambientes em produção geralmente informamos o host que vai acessar o backend
-    })
+    });
+
+    // MOVER SECRETKEY PARA VARIAVEIS DE AMBIENTE
+    await fastify.register(jwt, {
+        secret: 'nlwcopa2022secretetoken',
+    });
 
     await fastify.register(authRoutes);
     await fastify.register(pollRoutes);
@@ -24,7 +30,7 @@ async function bootstrap() {
     await fastify.register(guessRoutes);
     await fastify.register(gameRoutes);
    
-    await fastify.listen({ port: 3333, host: '0.0.0.0' })
+    await fastify.listen({ port: 3333, host: '0.0.0.0' });
 }
 
 bootstrap()
